@@ -32,7 +32,7 @@ Você pode optar por executar a aplicação usando o Docker ou [Supabase](https:
 $ git clone https://github.com/ismaelczar/fullstackweek-foods.git
 
 # Vá para a pasta da aplicação Front End
-$ cd full-stack-week-barber
+$ cd fullstackweek-foods
 
 # Instale as dependências
 $ npm i
