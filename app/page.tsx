@@ -7,6 +7,7 @@ import PromoBanner from "@/public/PromoBanner.png";
 import { Button } from "./_components/ui/button";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import ProductList from "./_components/product-list";
 
 export default function Home() {
   return (
@@ -42,6 +43,10 @@ export default function Home() {
             Ver todos <ChevronRight size={16} />
           </Link>
         </Button>
+      </div>
+
+      <div className="space-y-4 py-6">
+        <ProductList />
       </div>
     </>
   );
