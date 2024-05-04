@@ -10,6 +10,7 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import ProductList from "./_components/product-list";
 import PromoBanner from "./_components/promo-banner";
+import RestaurantList from "./_components/restaurant-list";
 
 export default function Home() {
   return (
@@ -63,6 +64,10 @@ export default function Home() {
       </div>
 
       {/* TODO:Ao clicar no restaurante, direcionar para o componente /restaurante/[id].tsx */}
+
+      <div className="mb-6">
+        <RestaurantList />
+      </div>
     </>
   );
 }
