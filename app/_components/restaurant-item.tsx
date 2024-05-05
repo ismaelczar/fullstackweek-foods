@@ -4,8 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "./ui/badge";
 
-import bikeIco from "@/public/bikeIco.png";
-import timeIco from "@/public/timeIco.png";
 import { formatCurrency } from "../_helpers/price";
 import { Button } from "./ui/button";
 
@@ -47,7 +45,7 @@ const RestauranteItem = ({ restaurant }: RestauranteItemProps) => {
           <h2 className="text-sm font-semibold">{restaurant.name}</h2>
           <div className="item-center flex gap-4">
             <div className="flex items-center gap-1">
-              <Image src={bikeIco} alt="" />
+              <Image src="/bikeIco.svg" alt="" width={12} height={12} />
 
               <span className="text-xs text-gray-400">
                 {Number(restaurant.deliveryFee) === 0
@@ -57,7 +55,7 @@ const RestauranteItem = ({ restaurant }: RestauranteItemProps) => {
             </div>
 
             <div className="flex items-center gap-1">
-              <Image src={timeIco} alt="" />
+              <Image src="/timeIco.svg" alt="" width={12} height={12} />
               <span className="text-xs text-gray-400">
                 {restaurant.deliveryTimeMinutes} min
               </span>
