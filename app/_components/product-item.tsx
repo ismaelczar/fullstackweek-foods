@@ -19,7 +19,7 @@ interface ProductItemProps {
 
 const ProductItem = ({ product }: ProductItemProps) => {
   return (
-    <Link href={""} className="w-[150px] min-w-[150px]">
+    <div className="w-[150px] min-w-[150px]">
       <div className="w-full space-y-2">
         <div className="relative aspect-square w-full">
           <Link href={""}>
@@ -30,7 +30,8 @@ const ProductItem = ({ product }: ProductItemProps) => {
               className="rounded-lg object-cover shadow-md"
             />
           </Link>
-          <Badge className="absolute left-2 top-2 z-50 flex items-center text-white">
+
+          <Badge className="absolute left-2 top-2 z-50 flex items-center px-2 py-[2px] text-white">
             <ArrowDown size={12} />
             {product.discountPercentage}%
           </Badge>
@@ -51,7 +52,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
           </span>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
