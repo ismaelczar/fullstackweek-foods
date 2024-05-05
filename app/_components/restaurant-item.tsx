@@ -6,6 +6,7 @@ import { Badge } from "./ui/badge";
 
 import { formatCurrency } from "../_helpers/price";
 import { Button } from "./ui/button";
+import BagdeItem from "./badge";
 
 interface RestauranteItemProps {
   restaurant: Restaurant;
@@ -16,7 +17,7 @@ const RestauranteItem = ({ restaurant }: RestauranteItemProps) => {
     <div className="min-w-[266px] max-w-[266px]">
       <div className="w-full space-y-2">
         <div className="relative aspect-square h-[136px] w-full object-cover ">
-          <Link href={""}>
+          <Link href={`/restaurants/${restaurant.id}`}>
             <Image
               src={restaurant.imageUrl}
               alt={restaurant.name}
@@ -24,14 +25,9 @@ const RestauranteItem = ({ restaurant }: RestauranteItemProps) => {
               className="ob rounded-md object-cover"
             />
           </Link>
-          <Badge className="absolute left-2 top-4 z-50 flex items-center gap-[2px] bg-white text-black">
-            <StarIcon
-              size={12}
-              height="bold"
-              className=" fill-[#FFB100] text-[#FFB100]"
-            />
-            5.0
-          </Badge>
+          <div className="absolute left-2 top-2 z-50">
+            <BagdeItem type={1} />
+          </div>
 
           <Button
             size="icon"
