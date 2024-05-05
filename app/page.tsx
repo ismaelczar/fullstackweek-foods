@@ -17,60 +17,62 @@ export default function Home() {
         <Search />
       </div>
 
-      <div className="pt-6">
-        <CategoryList />
-      </div>
+      <main>
+        <div className="pt-6">
+          <CategoryList />
+        </div>
 
-      <div className="pt-6">
-        <PromoBanner
-          src="/promo-banner-01.png"
-          alt="Baner com promoções em pizzas"
-        />
-      </div>
+        <div className="pt-6">
+          <PromoBanner
+            src="/promo-banner-01.png"
+            alt="Baner com promoções em pizzas"
+          />
+        </div>
 
-      <div className="flex items-center justify-between px-5 pt-6">
-        <h2 className="font-semibold">Pedidos Recomendados</h2>
-        <Button
-          asChild
-          className="border-node bg-transparent p-0"
-          variant={"link"}
-        >
-          <Link href={""} className="flex items-center">
-            Ver todos <ChevronRight size={16} />
-          </Link>
-        </Button>
-      </div>
+        <div className="flex items-center justify-between px-5 pt-6">
+          <h2 className="font-semibold">Pedidos Recomendados</h2>
+          <Button
+            asChild
+            className="border-node bg-transparent p-0"
+            variant={"link"}
+          >
+            <Link href={""} className="flex items-center">
+              Ver todos <ChevronRight size={16} />
+            </Link>
+          </Button>
+        </div>
 
-      <div className="space-y-4 py-6">
-        {/* TODO:Ao clicar no produto, direcionar para o componente /product/[id].tsx */}
-        <ProductList />
-      </div>
+        <div className="space-y-4 py-6">
+          {/* TODO:Ao clicar no produto, direcionar para o componente /product/[id].tsx */}
+          <ProductList />
+        </div>
 
-      <div className="px-5">
-        <PromoBanner
-          src="/promo-banner-02.png"
-          alt="Banner com promoções em lanches"
-        />
-      </div>
+        <div className="px-5">
+          <PromoBanner
+            src="/promo-banner-02.png"
+            alt="Banner com promoções em lanches"
+          />
+        </div>
 
-      <div className="flex items-center justify-between px-5 pt-6">
-        <h2 className="font-semibold">Restaurantes Recomendados</h2>
-        <Button
-          asChild
-          className="border-node bg-transparent p-0"
-          variant={"link"}
-        >
-          <Link href={""} className="flex items-center">
-            Ver todos <ChevronRight size={16} />
-          </Link>
-        </Button>
-      </div>
+        <div className="flex items-center justify-between px-5 pt-6">
+          <h2 className="font-semibold">Restaurantes Recomendados</h2>
+          <Button
+            asChild
+            className="border-node bg-transparent p-0"
+            variant={"link"}
+          >
+            <Link href={""} className="flex items-center">
+              Ver todos <ChevronRight size={16} />
+            </Link>
+          </Button>
+        </div>
 
-      {/* TODO:Ao clicar no restaurante, direcionar para o componente /restaurante/[id].tsx */}
+        {/* TODO:Ao clicar no restaurante, direcionar para o componente /restaurante/[id].tsx */}
 
-      <div className="mb-6">
-        <RestaurantList />
-      </div>
+        <div className="mb-6">
+          <RestaurantList />
+        </div>
+      </main>
     </>
   );
 }
