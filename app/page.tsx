@@ -2,9 +2,6 @@ import CategoryList from "./_components/category-list";
 import Header from "./_components/header";
 import Search from "./_components/search";
 
-import PromoBaner01 from "@/public/promo-banner-01.png";
-import PromoBaner02 from "@/public/promo-banner-02.png";
-
 import { Button } from "./_components/ui/button";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
@@ -25,7 +22,10 @@ export default function Home() {
       </div>
 
       <div className="pt-6">
-        <PromoBanner src={PromoBaner01} alt={""} />
+        <PromoBanner
+          src="/promo-banner-01.png"
+          alt="Baner com promoções em pizzas"
+        />
       </div>
 
       <div className="flex items-center justify-between px-5 pt-6">
@@ -47,7 +47,10 @@ export default function Home() {
       </div>
 
       <div className="px-5">
-        <PromoBanner src={PromoBaner02} alt={""} />
+        <PromoBanner
+          src="/promo-banner-02.png"
+          alt="Banner com promoções em lanches"
+        />
       </div>
 
       <div className="flex items-center justify-between px-5 pt-6">
