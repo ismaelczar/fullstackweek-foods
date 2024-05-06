@@ -6,6 +6,7 @@ import { Button } from "./ui/button";
 import { ChevronLeft, HeartIcon, StarIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import BagdeItem from "./badge";
+import DeliveryInfo from "./delivery-info";
 
 interface RestaurantInfoProps {
   restaurant: Restaurant;
@@ -61,6 +62,10 @@ const RestaurantInfo = ({ restaurant }: RestaurantInfoProps) => {
           </div>
 
           <BagdeItem type={2} />
+        </div>
+
+        <div className="pt-3">
+          <DeliveryInfo deliveryInfo={restaurant} />
         </div>
       </div>
     </div>
