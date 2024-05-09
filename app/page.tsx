@@ -8,8 +8,19 @@ import { ChevronRight } from "lucide-react";
 import ProductList from "./_components/product-list";
 import PromoBanner from "./_components/promo-banner";
 import RestaurantList from "./_components/restaurant-list";
+import { db } from "./_lib/prisma";
 
-export default function Home() {
+const Home = async () => {
+  const products = await db.product.findMany({
+    include: {
+      restaurant: {
+        select: {
+          name: true,
+        },
+      },
+    },
+  });
+
   return (
     <>
       <Header />
@@ -43,8 +54,7 @@ export default function Home() {
         </div>
 
         <div className="space-y-4 py-6">
-          {/* TODO:Ao clicar no produto, direcionar para o componente /product/[id].tsx */}
-          <ProductList />
+          <ProductList products={products} />
         </div>
 
         <div className="px-5">
@@ -67,12 +77,12 @@ export default function Home() {
           </Button>
         </div>
 
-        {/* TODO:Ao clicar no restaurante, direcionar para o componente /restaurante/[id].tsx */}
-
         <div className="mb-6">
           <RestaurantList />
         </div>
       </main>
     </>
   );
-}
+};
+
+export default Home;

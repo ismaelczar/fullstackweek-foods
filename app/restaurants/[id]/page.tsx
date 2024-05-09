@@ -1,5 +1,6 @@
-import RestaurantInfo from "@/app/_components/restaurant-info";
+import RestaurantInfo from "@/app/restaurants/_components/restaurant-info";
 import { db } from "@/app/_lib/prisma";
+import { notFound } from "next/navigation";
 
 interface RestaurantPageProps {
   params: {
@@ -12,11 +13,42 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
     where: {
       id: params.id,
     },
+    include: {
+      categories: {
+        // orderBy: {
+        //   createdAt: "desc",
+        // },
+        include: {
+          products: {
+            //incluindo as categorias e os produtos do restaurante.
+            where: {
+              restaurantId: params.id,
+            },
+            include: {
+              restaurant: {
+                select: {
+                  name: true,
+                },
+              },
+            },
+          },
+        },
+      },
+      products: {
+        take: 10,
+        include: {
+          restaurant: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      },
+    },
   });
 
   if (!restaurant) {
-    // TODO: Redicerionar para home page ???
-    return undefined;
+    return notFound();
   }
 
   return (

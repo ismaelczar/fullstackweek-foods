@@ -1,15 +1,44 @@
 "use client";
 
-import { Restaurant } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import Image from "next/image";
-import { Button } from "./ui/button";
-import { ChevronLeft, HeartIcon, StarIcon } from "lucide-react";
+import { Button } from "../../_components/ui/button";
+import { ChevronLeft, HeartIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import BagdeItem from "./badge";
+import BagdeItem from "../../_components/badge";
 import DeliveryInfo from "./delivery-info";
+import RestaurantCategories from "./restaurant-categories";
+import ProductItem from "../../_components/product-item";
+import ProductList from "@/app/_components/product-list";
 
 interface RestaurantInfoProps {
-  restaurant: Restaurant;
+  restaurant: Prisma.RestaurantGetPayload<{
+    include: {
+      categories: {
+        include: {
+          products: {
+            include: {
+              restaurant: {
+                select: {
+                  name: true;
+                };
+              };
+            };
+          };
+        };
+      };
+
+      products: {
+        include: {
+          restaurant: {
+            select: {
+              name: true;
+            };
+          };
+        };
+      };
+    };
+  }>;
 }
 
 const RestaurantInfo = ({ restaurant }: RestaurantInfoProps) => {
@@ -31,6 +60,7 @@ const RestaurantInfo = ({ restaurant }: RestaurantInfoProps) => {
 
         <div className="justfy-between flex items-center">
           <Button
+            variant="secondary"
             size="icon"
             className="absolute left-2 top-2 rounded-full bg-white"
             onClick={handleBack}
@@ -39,6 +69,7 @@ const RestaurantInfo = ({ restaurant }: RestaurantInfoProps) => {
           </Button>
 
           <Button
+            variant="secondary"
             size="icon"
             className="absolute right-2 top-2 rounded-full bg-slate-500"
           >
@@ -66,6 +97,29 @@ const RestaurantInfo = ({ restaurant }: RestaurantInfoProps) => {
 
         <div className="pt-3">
           <DeliveryInfo deliveryInfo={restaurant} />
+        </div>
+
+        <div className="item-center flex w-full  gap-4 overflow-x-auto px-5 pt-3 [&::-webkit-scrollbar]:hidden">
+          {restaurant.categories.map((category) => (
+            <RestaurantCategories key={category.id} category={category} />
+          ))}
+        </div>
+
+        <div>
+          <h2 className="pt-5 font-semibold">Mais Pedidos</h2>
+
+          <div className="flex gap-4 overflow-x-scroll px-5 [&::-webkit-scrollbar]:hidden">
+            {restaurant.products.map((product) => (
+              <ProductItem key={product.id} product={product} />
+            ))}
+          </div>
+
+          {restaurant.categories.map((category) => (
+            <div className="mt-6 space-y-4" key={category.id}>
+              <h2 className="px-5  font-semibold">{category.name}</h2>
+              <ProductList products={category.products} />
+            </div>
+          ))}
         </div>
       </div>
     </div>

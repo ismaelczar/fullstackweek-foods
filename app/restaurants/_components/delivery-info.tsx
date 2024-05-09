@@ -1,7 +1,7 @@
 import { Prisma } from "@prisma/client";
 import Image from "next/image";
-import { formatCurrency } from "../_helpers/price";
-import { Card } from "./ui/card";
+import { formatCurrency } from "../../_helpers/price";
+import { Card } from "../../_components/ui/card";
 
 interface DeliveryInfoProps {
   deliveryInfo: Prisma.RestaurantGetPayload<{
