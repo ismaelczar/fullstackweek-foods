@@ -3,6 +3,8 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 
 import logo from "@/public/logo.png";
+import { Sheet, SheetTrigger } from "./ui/sheet";
+import Menu from "./sheet-content";
 
 const Header = () => {
   return (
@@ -12,13 +14,19 @@ const Header = () => {
           <Image src={logo} alt="Logotipo FWS food" className="object-cover" />
         </div>
 
-        <Button
-          size="icon"
-          className="border-none bg-transparent"
-          variant={"outline"}
-        >
-          <MenuIcon className="h-5 w-5 text-black" />
-        </Button>
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button
+              size="icon"
+              className="border-none bg-transparent"
+              variant={"outline"}
+            >
+              <MenuIcon className="h-5 w-5 text-black" />
+            </Button>
+          </SheetTrigger>
+
+          <Menu />
+        </Sheet>
       </div>
     </header>
   );
