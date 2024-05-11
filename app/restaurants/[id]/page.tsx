@@ -1,4 +1,4 @@
-import RestaurantInfo from "@/app/restaurants/_components/restaurant-info";
+import RestaurantInfo from "@/app/restaurants/[id]/_components/restaurant-info";
 import { db } from "@/app/_lib/prisma";
 import { notFound } from "next/navigation";
 
