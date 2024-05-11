@@ -53,8 +53,8 @@ const Home = async () => {
           </Button>
         </div>
 
-        <div className="space-y-4 py-6">
-          <ProductList products={products} />
+        <div className="px-4 py-6">
+          <ProductList products={products} type={1} />
         </div>
 
         <div className="px-5">

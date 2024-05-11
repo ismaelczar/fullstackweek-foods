@@ -108,7 +108,7 @@ const RestaurantInfo = ({ restaurant }: RestaurantInfoProps) => {
         <div>
           <h2 className="pt-5 font-semibold">Mais Pedidos</h2>
 
-          <div className="flex gap-4 overflow-x-scroll px-5 [&::-webkit-scrollbar]:hidden">
+          <div className="flex gap-4 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
             {restaurant.products.map((product) => (
               <ProductItem key={product.id} product={product} />
             ))}
@@ -117,7 +117,7 @@ const RestaurantInfo = ({ restaurant }: RestaurantInfoProps) => {
           {restaurant.categories.map((category) => (
             <div className="mt-6 space-y-4" key={category.id}>
               <h2 className="px-5  font-semibold">{category.name}</h2>
-              <ProductList products={category.products} />
+              <ProductList products={category.products} type={1} />
             </div>
           ))}
         </div>
