@@ -11,12 +11,20 @@ interface ProductListProps {
       };
     };
   }>[];
+
+  type: number;
 }
 
-const ProductList = ({ products }: ProductListProps) => {
+const ProductList = ({ products, type }: ProductListProps) => {
   return (
     //px-5
-    <div className="flex gap-4 overflow-x-scroll  [&::-webkit-scrollbar]:hidden">
+    <div
+      className={`${
+        type != 1
+          ? "grid grid-cols-2 gap-6  "
+          : "flex gap-4 overflow-x-scroll [&::-webkit-scrollbar]:hidden"
+      } `}
+    >
       {products.map((product) => (
         <ProductItem key={product.id} product={product} />
       ))}

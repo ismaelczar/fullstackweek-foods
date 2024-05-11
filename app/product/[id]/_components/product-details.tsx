@@ -124,7 +124,7 @@ const ProductDetails = ({ product, juices }: ProductDetailsProps) => {
 
         <div className="py-5">
           <h2 className="text-base font-semibold">Sucos</h2>
-          <ProductList products={juices} />
+          <ProductList products={juices} type={1} />
         </div>
 
         <div>
