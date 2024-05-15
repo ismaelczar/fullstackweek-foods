@@ -1,6 +1,6 @@
 "use client";
 
-import { Prisma, Product } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { ArrowDown, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -9,6 +9,7 @@ import { calculateTotalPrice, formatCurrency } from "@/app/_helpers/price";
 import { Badge } from "@/app/_components/ui/badge";
 import DeliveryInfo from "@/app/restaurants/[id]/_components/delivery-info";
 import ProductList from "@/app/_components/product-list";
+import { useState } from "react";
 
 interface ProductDetailsProps {
   product: Prisma.ProductGetPayload<{
@@ -38,11 +39,28 @@ interface ProductDetailsProps {
 }
 
 const ProductDetails = ({ product, juices }: ProductDetailsProps) => {
-  const route = useRouter();
+  const [quantity, setQuantity] = useState<number>(1);
+
   const deliveryInfo = {
     deliveryFee: product.restaurant.deliveryFee,
     deliveryTimeMinutes: product.restaurant.deliveryTimeMinutes,
   };
+
+  function handleIncrementAmount() {
+    setQuantity((state) => state + 1);
+  }
+
+  function handleDecrementAmout() {
+    setQuantity((state) => {
+      if (state === 1) {
+        return 1;
+      }
+
+      return state - 1;
+    });
+  }
+
+  const route = useRouter();
 
   function handleBack() {
     route.replace("/");
@@ -105,17 +123,27 @@ const ProductDetails = ({ product, juices }: ProductDetailsProps) => {
           </div>
 
           <div className="flex items-center gap-3">
-            <Button className="h-[32] w-[32] p-2" variant="secondary">
+            <Button
+              className="h-[32] w-[32] p-2"
+              variant="secondary"
+              onClick={handleDecrementAmout}
+            >
               <ChevronLeft size={16} />
             </Button>
-            <p>1</p>
-            <Button className="h-[32] w-[32] p-2" variant="secondary">
+
+            <span>{quantity}</span>
+
+            <Button
+              className="h-[32] w-[32] p-2"
+              variant="secondary"
+              onClick={handleIncrementAmount}
+            >
               <ChevronRight size={16} />
             </Button>
           </div>
         </div>
 
-        <div className="py-5">
+        <div className="flex justify-center py-5">
           <DeliveryInfo deliveryInfo={deliveryInfo} />
         </div>
 
