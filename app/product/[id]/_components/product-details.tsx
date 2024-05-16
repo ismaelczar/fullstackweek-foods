@@ -9,7 +9,10 @@ import { calculateTotalPrice, formatCurrency } from "@/app/_helpers/price";
 import { Badge } from "@/app/_components/ui/badge";
 import DeliveryInfo from "@/app/restaurants/[id]/_components/delivery-info";
 import ProductList from "@/app/_components/product-list";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { Sheet, SheetTrigger } from "@/app/_components/ui/sheet";
+import Cart from "@/app/_components/cart";
+import { CartContext } from "@/app/_context/cart";
 
 interface ProductDetailsProps {
   product: Prisma.ProductGetPayload<{
@@ -27,11 +30,7 @@ interface ProductDetailsProps {
 
   juices: Prisma.ProductGetPayload<{
     include: {
-      restaurant: {
-        select: {
-          name: true;
-        };
-      };
+      restaurant: true;
     };
 
     take: 10;
@@ -39,7 +38,8 @@ interface ProductDetailsProps {
 }
 
 const ProductDetails = ({ product, juices }: ProductDetailsProps) => {
-  const [quantity, setQuantity] = useState<number>(1);
+  const [quantity, setQuantity] = useState(1);
+  const { products, addProductToCart } = useContext(CartContext);
 
   const deliveryInfo = {
     deliveryFee: product.restaurant.deliveryFee,
@@ -66,6 +66,10 @@ const ProductDetails = ({ product, juices }: ProductDetailsProps) => {
     route.replace("/");
   }
 
+  function handleAddToCartClick() {
+    addProductToCart(product, quantity);
+  }
+
   return (
     <div>
       <div className="relative z-0 h-[332px] w-full">
@@ -89,13 +93,13 @@ const ProductDetails = ({ product, juices }: ProductDetailsProps) => {
       </div>
 
       <div className="absolute mt-[-10px] w-full rounded-t-lg bg-white p-5">
-        <div className="flex items-center gap-[6px]">
+        <div className=" flex items-center gap-[6px]">
           <Image
             src={product.restaurant.imageUrl}
             alt={product.restaurant.name}
             width={0}
             height={0}
-            className=" h-[20px] w-[20px] rounded-full object-cover"
+            className="h-7 w-7 rounded-full object-cover"
           />
           <span className="text-xs text-gray-400">
             {product.restaurant.name}
@@ -107,9 +111,9 @@ const ProductDetails = ({ product, juices }: ProductDetailsProps) => {
         <div className="flex items-center justify-between">
           <div className="flex flex-col pt-3">
             <div className="flex items-center gap-[5px]">
-              <strong className="text-xl">
+              <h2 className="text-xl font-semibold">
                 {formatCurrency(calculateTotalPrice(product))}
-              </strong>
+              </h2>
               <Badge className="flex w-[48px] items-center px-2 py-[2px] text-white">
                 <ArrowDown size={12} />
                 {product.discountPercentage}%
@@ -156,9 +160,18 @@ const ProductDetails = ({ product, juices }: ProductDetailsProps) => {
         </div>
 
         <div>
-          <Button className="w-full text-sm font-semibold">
-            Adicionar à Saloca
-          </Button>
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button
+                className="w-full text-sm font-semibold"
+                onClick={handleAddToCartClick}
+              >
+                Adicionar à Saloca
+              </Button>
+            </SheetTrigger>
+
+            <Cart />
+          </Sheet>
         </div>
       </div>
     </div>
